@@ -1,5 +1,10 @@
 from typing import List, Tuple
 import pandas as pd
+import numpy as np
+
+'''
+    Corta todos os sinais de um DataFrame por canal de acordo com um arquivo extra de timestamps.
+'''
 
 class ChopSignalsLogic:
     def __init__(self, df):
@@ -37,25 +42,24 @@ class ChopSignalsLogic:
 
 
     def perform_chop(self):
-        # Isso não corta automaticamente outros canais em que o sinal possa estar bom?
         for t1, t2 in self.fp1:
-            self.csv_df = self.__chop_signal(t1, t2)
+            self.__chop_signal(t1, t2, 'fp1')
         for t1, t2 in self.fp2:
-            self.csv_df = self.__chop_signal(t1, t2)
+            self.__chop_signal(t1, t2, 'fp2')
         for t1, t2 in self.c3:
-            self.csv_df = self.__chop_signal(t1, t2)
+            self.__chop_signal(t1, t2, 'c3')
         for t1, t2 in self.c4:
-            self.csv_df = self.__chop_signal(t1, t2)
+            self.__chop_signal(t1, t2, 'c4')
         for t1, t2 in self.p7:
-            self.csv_df = self.__chop_signal(t1, t2)
+            self.__chop_signal(t1, t2, 'p7')
         for t1, t2 in self.p8:
-            self.csv_df = self.__chop_signal(t1, t2)
+            self.__chop_signal(t1, t2, 'p8')
         for t1, t2 in self.o1:
-            self.csv_df = self.__chop_signal(t1, t2)
+            self.__chop_signal(t1, t2, 'o1')
         for t1, t2 in self.o2:
-            self.csv_df = self.__chop_signal(t1, t2)
+            self.__chop_signal(t1, t2, 'o2')
 
 
-    def __chop_signal(self, t1, t2):
-        return self.csv_df.loc[(self.csv_df['Timestamp'] >= t1) & (self.csv_df['Timestamp'] <= t2)]
+    def __chop_signal(self, t1, t2, channel_name):
+        self.csv_df.loc[(self.csv_df['Timestamp'] >= t1) & (self.csv_df['Timestamp'] <= t2), channel_name] = np.nan
 
