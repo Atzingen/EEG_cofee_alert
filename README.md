@@ -8,6 +8,7 @@ Bem-vindo ao projeto EEG_coffee_alert! Este é um repositório dedicado a um pro
 <div align="justify">
 <h2>Coleta de Dados EEG</h2>
 Os dados utilizados neste projeto foram coletados de 17 voluntários que foram submetidos a 6 momentos distintos para coleta dos dados EEG. Os testes aplicados foram os seguintes:
+
 </div>
 
 <div align="left">
@@ -53,6 +54,7 @@ Os dados EEG utilizados neste projeto estão armazenados na pasta <b>/data</b>. 
 <div align="justify">
 <h2>Montando o ambiente virtual</h2>
 Este projeto utiliza a distribuição do <a href="https://www.anaconda.com/products/distribution">Anaconda</a> para criar o ambiente virtual em Python. No entanto, para uma instalação mais enxuta, recomendamos o uso do <a href="https://docs.conda.io/en/latest/miniconda.html">Miniconda</a>.
+
 </div>
 
 <div align="justify">
