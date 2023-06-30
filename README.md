@@ -57,7 +57,7 @@ Neste diretório, você encontrará os seguintes arquivos e pastas:
 <div align="justify">
 <h3>explorer.ipynb</h3>
 <p>
-Notebook Jupyter que oferece uma interface para explorar os sinais EEG.
+O notebook "EEG Explorer" é uma ferramenta de análise de dados de eletroencefalografia (EEG) que permite visualizar e plotar sinais de diferentes canais cerebrais. Ele utiliza bibliotecas como pandas, numpy, scipy, matplotlib e plotly para processar e exibir os dados. O usuário pode importar arquivos CSV contendo informações do EEG e selecionar os canais que deseja visualizar. A ferramenta também possui interatividade, permitindo ajustar o tamanho da janela móvel e selecionar diferentes arquivos e canais para análise. Isso possibilita uma análise mais detalhada dos sinais EEG, com gráficos de média móvel e primeira derivada para uma melhor compreensão dos dados.
 </p>
 </div>
 
