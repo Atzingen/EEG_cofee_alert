@@ -7,6 +7,8 @@ Bem-vindo ao projeto EEG_coffee_alert! Este é um repositório dedicado a um pro
 </p>
 </div>
 
+<!------------------------------------------------------------------------------------------------------------------------------>
+
 <div align="justify">
 <h2>Coleta de Dados EEG</h2>
 <p>
@@ -27,18 +29,14 @@ Os dados utilizados neste projeto foram coletados de 17 voluntários que foram s
 
 <div align="justify">
 <p>
-Esses testes foram realizados usando a plataforma online do Human Benchmark. Você pode encontrar mais informações sobre esses testes e a plataforma em <a href="https://humanbenchmark.com/">https://humanbenchmark.com/</a>.
+Esses testes foram realizados usando a plataforma online do Human Benchmark. Você pode encontrar mais informações sobre esses testes e a plataforma em <a href="https://humanbenchmark.com/">Human Benchmark</a>.
 </p>
 </div>
 
+<!------------------------------------------------------------------------------------------------------------------------------>
+
 <div align="left">
 <h2>Estrutura do repositório</h2>
-  <ul>
-    <li><b>src</b>: Esta pasta contém os scripts Python responsáveis pelo processamento de dados EEG e a pasta <b>data</b>, que contém deve conter os dados.</li>
-    <li><b>environment.yml</b>: Arquivo YAML que permite a criação do ambiente virtual necessário para reproduzir o ambiente Anaconda utilizado no projeto.</li>
-    <li><b>explorer.ipynb</b>: Notebook Jupyter que oferece uma interface para explorar os sinais EEG.</li>
-    <li><b>requirements.txt</b>: Arquivo que lista os requisitos de software necessários para o projeto, como o google-cloud.</li>
-  </ul>
 </div>
 
 <div align="justify">
@@ -48,7 +46,7 @@ Neste diretório, você encontrará os seguintes arquivos e pastas:
 </p>
 </div>
 
-<div align="center">
+<div align="left">
   <ul>
     <li><b>data</b>: Pasta que contém scripts necessários para puxar os dados e que também irá armazenar os dados coletados. Esses scripts são responsáveis por obter os sinais EEG brutos de uma fonte externa, o google-cloud, e armazená-los localmente para processamento e análise posterior.</li>
     <li><b>filter</b>: Diretório que contém scripts para processar os dados EEG. Esses scripts são responsáveis por aplicar filtros e técnicas de pré-processamento nos sinais EEG, visando formatar os dados e prepará-los para as etapas posteriores.</li>
@@ -57,11 +55,36 @@ Neste diretório, você encontrará os seguintes arquivos e pastas:
 </div>
 
 <div align="justify">
+<h3>explorer.ipynb</h3>
+<p>
+Notebook Jupyter que oferece uma interface para explorar os sinais EEG.
+</p>
+</div>
+
+<div align="justify">
+<h3>environment.yml</h3>
+<p>
+Arquivo YAML que permite a criação do ambiente virtual necessário para reproduzir o ambiente Anaconda utilizado no projeto.
+</p>
+</div>
+
+<div align="justify">
+<h3>requirements.txt</h3>
+<p>
+Arquivo que lista os requisitos de software necessários para o projeto, como o google-cloud.
+</p>
+</div>
+
+<!------------------------------------------------------------------------------------------------------------------------------>
+
+<div align="justify">
 <h2>Detalhamento dos dados EEG</h2>
 <p>
 Os dados EEG utilizados neste projeto estão armazenados na pasta <b>/data</b>. Esses dados são fundamentais para os processos realizados nos scripts Python presentes em <b>src</b> e no notebook <b>explorer.ipynb</b>.
 </p>
 </div>
+
+<!------------------------------------------------------------------------------------------------------------------------------>
 
 <div align="justify">
 <h2>Montando o ambiente virtual</h2>
