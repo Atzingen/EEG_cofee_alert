@@ -4,7 +4,9 @@
 
 ## Introdução ao projeto
 
+```<center>
 Bem-vindo ao projeto EEG_coffee_alert! Este é um repositório dedicado a um projeto de análise de dados EEG usando Python. Aqui você encontrará informações sobre a estrutura do repositório, detalhes sobre a base de dados utilizada e instruções para montar o ambiente virtual necessário para desenvolver e executar o projeto.
+```
 
 ## Estrutura do repositório
 
