@@ -8,6 +8,9 @@ Bem-vindo ao projeto EEG_coffee_alert! Este é um repositório dedicado a um pro
 <div align="justify">
 <h2>Coleta de Dados EEG</h2>
 Os dados utilizados neste projeto foram coletados de 17 voluntários que foram submetidos a 6 momentos distintos para coleta dos dados EEG. Os testes aplicados foram os seguintes:
+</div>
+
+<div align="left">
 <ul>
   <li>alpha: Estado de relaxamento dos voluntários.</li>
   <li>cafe-1: Voluntário consome um café de má qualidade.</li>
@@ -16,6 +19,9 @@ Os dados utilizados neste projeto foram coletados de 17 voluntários que foram s
   <li>seq: Voluntário realiza um teste cognitivo sequencial inspirado no Human Benchmark.</li>
   <li>react: Voluntário realiza um teste de velocidade de reação inspirado no Human Benchmark.</li>
 </ul>
+</div>
+
+<div align="justify">
 Esses testes foram realizados usando a plataforma online do Human Benchmark. Você pode encontrar mais informações sobre esses testes e a plataforma em <a href="https://humanbenchmark.com/">https://humanbenchmark.com/</a>.
 </div>
 
