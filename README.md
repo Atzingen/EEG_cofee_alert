@@ -5,6 +5,20 @@
 Bem-vindo ao projeto EEG_coffee_alert! Este é um repositório dedicado a um projeto de análise de dados EEG usando Python. Aqui você encontrará informações sobre a estrutura do repositório, detalhes sobre a base de dados utilizada e instruções para montar o ambiente virtual necessário para desenvolver e executar o projeto.
 </div>
 
+<div align="justify">
+<h2>Coleta de Dados EEG</h2>
+Os dados utilizados neste projeto foram coletados de 17 voluntários que foram submetidos a 6 momentos distintos para coleta dos dados EEG. Os testes aplicados foram os seguintes:
+<ul>
+  <li>alpha: Estado de relaxamento dos voluntários.</li>
+  <li>cafe-1: Voluntário consome um café de má qualidade.</li>
+  <li>cafe-2: Voluntário consome um café de boa qualidade.</li>
+  <li>chimp: Voluntário realiza um teste cognitivo inspirado no teste "Chimp Test" do Human Benchmark.</li>
+  <li>seq: Voluntário realiza um teste cognitivo sequencial inspirado no Human Benchmark.</li>
+  <li>react: Voluntário realiza um teste de velocidade de reação inspirado no Human Benchmark.</li>
+</ul>
+Esses testes foram realizados usando a plataforma online do Human Benchmark. Você pode encontrar mais informações sobre esses testes e a plataforma em <a href="https://humanbenchmark.com/">https://humanbenchmark.com/</a>.
+</div>
+
 <div align="left">
 <h2>Estrutura do repositório</h2>
   <ul>
