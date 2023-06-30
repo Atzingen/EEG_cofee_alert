@@ -64,14 +64,14 @@ O notebook "EEG Explorer" é uma ferramenta de análise de dados de eletroencefa
 <div align="justify">
 <h3>environment.yml</h3>
 <p>
-Arquivo YAML que permite a criação do ambiente virtual necessário para reproduzir o ambiente Anaconda utilizado no projeto.
+Arquivo yaml que permite a criação do ambiente Anaconda necessário para reproduzir o projeto. Mais adiante, na seção <b>Montando o ambiente virtual</b> será explicado como utilizar esse arquivo.
 </p>
 </div>
 
 <div align="justify">
 <h3>requirements.txt</h3>
 <p>
-Arquivo que lista os requisitos de software necessários para o projeto, como o google-cloud.
+Arquivo que lista os requisitos de software necessários para o projeto, como o google-cloud. Tenha certeza de possuir cada um deles.
 </p>
 </div>
 
