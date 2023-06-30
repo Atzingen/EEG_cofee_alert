@@ -25,6 +25,6 @@ Para reproduzir o ambiente Python necessário para este projeto, execute o segui
 
 ```bash
 conda env create -f environment.yml
-
+```
 
 ## Trabalhando com os dados no bucket
