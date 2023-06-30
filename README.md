@@ -11,10 +11,11 @@ Bem-vindo ao projeto EEG_coffee_alert! Este é um repositório dedicado a um pro
 ## Estrutura do repositório
 
 <div style="text-align: right">
-- <b>src</b>: Esta pasta contém os scripts Python responsáveis pelo processamento de dados EEG.
-- <b>environment.yml</b>: Arquivo YAML que permite a criação do ambiente virtual necessário para reproduzir o ambiente Anaconda utilizado no projeto.
-- <b>explorer.ipynb</b>: Notebook Jupyter que oferece uma interface para explorar os sinais EEG.
-- <b>requirements.txt</b>: Arquivo que lista os requisitos de software necessários para o projeto, como o google-cloud.
+  <ul>
+    <li><b>src</b>: Esta pasta contém os scripts Python responsáveis pelo processamento de dados EEG.</li>
+    <li></li><b>environment.yml</b>: Arquivo YAML que permite a criação do ambiente virtual necessário para reproduzir o ambiente Anaconda utilizado no projeto.</li>
+    <li></li><b>explorer.ipynb</b>: Notebook Jupyter que oferece uma interface para explorar os sinais EEG.</li><li><b>requirements.txt</b>: Arquivo que lista os requisitos de software necessários para o projeto, como o google-cloud.</li>
+  </ul>
 </div>
 
 ## Detalhamento dos dados EEG
