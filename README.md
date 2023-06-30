@@ -1,4 +1,4 @@
-# README - Projeto XYZ
+# README - Projeto EEG_coffee_alert
 
 ## Introdução ao projeto
 
