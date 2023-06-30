@@ -1,3 +1,5 @@
+<div style="text-align: justify">
+
 # README - Projeto EEG_coffee_alert
 
 ## Introdução ao projeto
