@@ -22,7 +22,7 @@ Bem-vindo ao projeto EEG_coffee_alert! Este é um repositório dedicado a um pro
 ## Detalhamento dos dados EEG
 
 <div align="justify">
-Os dados EEG utilizados neste projeto estão armazenados na pasta <b>/data</b>. Esses dados são fundamentais para as análises realizadas nos scripts Python presentes em <b>src</b> e no notebook <b>explorer.ipynb</b>.
+Os dados EEG utilizados neste projeto estão armazenados na pasta <b>/data</b>. Esses dados são fundamentais para os processos realizados nos scripts Python presentes em <b>src</b> e no notebook <b>explorer.ipynb</b>.
 </div>
 
 ## Montando o ambiente virtual
