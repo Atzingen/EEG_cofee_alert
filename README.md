@@ -24,8 +24,10 @@ Este projeto utiliza a distribuição do [Anaconda](https://www.anaconda.com/pro
 
 Para reproduzir o ambiente Python necessário para este projeto, execute o seguinte comando no terminal:
 
-```bash <center>
+<p align="center">
+```bash
 conda env create -f environment.yml
 ```
+<\p>
 
 ## Trabalhando com os dados no bucket
