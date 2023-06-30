@@ -80,12 +80,6 @@ Arquivo que lista os requisitos de software necessários para o projeto, como o 
 <div align="justify">
 <h2>Detalhamento dos dados EEG</h2>
 <p>
-Os dados EEG utilizados neste projeto estão armazenados na pasta <b>/data</b>. Esses dados são fundamentais para os processos realizados nos scripts Python presentes em <b>src</b> e no notebook <b>explorer.ipynb</b>.
-</p>
-</div>
-
-<div align="justify">
-<p>
 Os dados estão separados em diversos arquivos, cada um representando um momento específico de um voluntário. O formato do nome do arquivo segue o padrão:
     <code>&lt;nome do teste&gt;_&lt;ID do voluntário&gt;</code> (por exemplo: voluntário 1 durante o teste alpha: <code>alpha_1</code>).
 </p>
@@ -129,4 +123,28 @@ conda env create -f environment.yml
 </pre>
 </div>
 
-## Trabalhando com os dados no bucket
+<!------------------------------------------------------------------------------------------------------------------------------>
+
+<div align="justify">
+<h2>Trabalhando com os dados no bucket</h2>
+<p>
+Os dados EEG utilizados neste projeto irão armazenados na pasta <b>src/data</b>. Esses dados são fundamentais para os processos realizados nos scripts Python presentes em <b>src</b> e no notebook <b>explorer.ipynb</b>.
+</p>
+</div>
+
+<div align="justify">
+<p>
+(continuar)
+</p>
+</div>
+
+<!------------------------------------------------------------------------------------------------------------------------------>
+
+<div align="justify">
+<h2>Executando o porjeto</h2>
+<p>
+(fazer)
+</p>
+</div>
+
+<!------------------------------------------------------------------------------------------------------------------------------>
