@@ -46,7 +46,7 @@ Neste diretório, você encontrará os seguintes arquivos e pastas:
 </p>
 </div>
 
-<div align="left">
+<div align="justify">
   <ul>
     <li><b>data</b>: Pasta que contém scripts necessários para puxar os dados e que também irá armazenar os dados coletados. Esses scripts são responsáveis por obter os sinais EEG de uma fonte externa, o google-cloud, e armazená-los localmente para processamento e análise posterior.</li>
     <li><b>filter</b>: Diretório que contém scripts para processar os dados EEG. Esses scripts são responsáveis por aplicar filtros e técnicas de pré-processamento nos sinais EEG, visando formatar os dados e prepará-los para as etapas posteriores envolvendo IA.</li>
