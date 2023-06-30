@@ -32,7 +32,7 @@ Este projeto utiliza a distribuição do <a href="https://www.anaconda.com/produ
 </div>
 
 <div align="justify">
-Para reproduzir o ambiente Python necessário para este projeto, execute o seguinte comando no terminal:
+Para reproduzir o ambiente Python necessário para este projeto, acesse o diretório que contém este projeto e execute o seguinte comando no terminal:
 </div>
 
 ```bash
