@@ -7,28 +7,22 @@ Bem-vindo ao projeto EEG_coffee_alert! Este é um repositório dedicado a um pro
 
 <div align="left">
 <h2>Estrutura do repositório</h2>
-  
   <ul>
     <li><b>src</b>: Esta pasta contém os scripts Python responsáveis pelo processamento de dados EEG e a pasta <b>data</b>, que contém deve conter os dados.</li>
     <li><b>environment.yml</b>: Arquivo YAML que permite a criação do ambiente virtual necessário para reproduzir o ambiente Anaconda utilizado no projeto.</li>
     <li><b>explorer.ipynb</b>: Notebook Jupyter que oferece uma interface para explorar os sinais EEG.</li>
     <li><b>requirements.txt</b>: Arquivo que lista os requisitos de software necessários para o projeto, como o google-cloud.</li>
   </ul>
-  
 </div>
 
 <div align="justify">
 <h3>src</h3>
 <p>Neste diretório, você encontrará os seguintes arquivos e pastas:</p>
-
-<ul>
-  <li><b>data</b>: Pasta que contém scripts necessários para puxar os dados e que também irá armazenar os dados coletados. Esses scripts são responsáveis por obter os sinais EEG brutos de uma fonte externa, como um banco de dados online, e armazená-los localmente para processamento e análise posterior.</li>
-  
-  <li><b>filter</b>: Diretório que contém scripts para processar os dados EEG armazenados na pasta "data". Esses scripts são responsáveis por aplicar filtros e técnicas de pré-processamento nos sinais EEG, visando remover artefatos e ruídos, e prepará-los para as análises posteriores.</li>
-  
-  <li><b>setup.sh</b>: Arquivo de script que pode conter comandos para configurar o ambiente de desenvolvimento ou realizar outras tarefas de configuração relacionadas ao projeto. É possível que esse arquivo seja usado para instalar dependências adicionais ou realizar configurações específicas necessárias para executar os scripts neste diretório.</li>
-</ul>
-
+  <ul>
+    <li><b>data</b>: Pasta que contém scripts necessários para puxar os dados e que também irá armazenar os dados coletados. Esses scripts são responsáveis por obter os sinais EEG brutos de uma fonte externa, o google-cloud, e armazená-los localmente para processamento e análise posterior.</li>
+    <li><b>filter</b>: Diretório que contém scripts para processar os dados EEG. Esses scripts são responsáveis por aplicar filtros e técnicas de pré-processamento nos sinais EEG, visando formatar os dados e prepará-los para as etapas posteriores.</li>
+    <li><b>setup.sh</b>: (Fazer)</li>
+  </ul>
 </div>
 
 <div align="justify">
