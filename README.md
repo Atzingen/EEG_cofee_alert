@@ -4,9 +4,9 @@
 
 ## Introdução ao projeto
 
-<p align="justified">
+<div style="text-align: justify">
 Bem-vindo ao projeto EEG_coffee_alert! Este é um repositório dedicado a um projeto de análise de dados EEG usando Python. Aqui você encontrará informações sobre a estrutura do repositório, detalhes sobre a base de dados utilizada e instruções para montar o ambiente virtual necessário para desenvolver e executar o projeto.
-</p>
+</div>
 
 ## Estrutura do repositório
 
@@ -17,15 +17,15 @@ Bem-vindo ao projeto EEG_coffee_alert! Este é um repositório dedicado a um pro
 
 ## Detalhamento dos dados EEG
 
-<p align="justified">
+<div style="text-align: justify">
 Os dados EEG utilizados neste projeto estão armazenados na pasta **/data**. Esses dados são fundamentais para as análises realizadas nos scripts Python presentes em **src** e no notebook **explorer.ipynb**.
-</p>
+</div>
 
 ## Montando o ambiente virtual
 
-<p align="justified">
-Este projeto utiliza a distribuição do [Anaconda](https://www.anaconda.com/products/distribution) para criar o ambiente virtual em Python. No entanto, para uma instalação mais enxuta, recomendamos o uso do [Miniconda](https://docs.conda.io/en/latest/miniconda.html).
-</p>
+<div style="text-align: justify">
+Este projeto utiliza a distribuição do <a href="https://www.anaconda.com/products/distribution">Anaconda</a> para criar o ambiente virtual em Python. No entanto, para uma instalação mais enxuta, recomendamos o uso do <a href="https://docs.conda.io/en/latest/miniconda.html">Miniconda</a>.
+</div>
 
 Para reproduzir o ambiente Python necessário para este projeto, execute o seguinte comando no terminal:
 
