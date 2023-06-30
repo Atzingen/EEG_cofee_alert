@@ -141,7 +141,7 @@ Os dados EEG utilizados neste projeto irão armazenados na pasta <b>src/data</b>
 <!------------------------------------------------------------------------------------------------------------------------------>
 
 <div align="justify">
-<h2>Executando o porjeto</h2>
+<h2>Executando o projeto</h2>
 <p>
 (fazer)
 </p>
