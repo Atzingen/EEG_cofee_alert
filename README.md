@@ -81,7 +81,7 @@ Arquivo que lista os requisitos de software necessários para o projeto, como o 
 <h2>Detalhamento dos dados EEG</h2>
 <p>
 Os dados estão separados em diversos arquivos, cada um representando um momento específico de um voluntário. O formato do nome do arquivo segue o padrão:
-    <code>&lt;nome do teste&gt;_&lt;ID do voluntário&gt;</code> (por exemplo: voluntário 1 durante o teste alpha: <code>alpha_1</code>).
+    <code>&lt;nome do teste&gt;_&lt;ID do voluntário&gt;</code> (por exemplo, arquivo referente ao voluntário 1 durante o teste alpha: <code>alpha_1</code>).
 </p>
 <p>
 Cada arquivo CSV possui as seguintes colunas:
