@@ -84,6 +84,28 @@ Os dados EEG utilizados neste projeto estão armazenados na pasta <b>/data</b>. 
 </p>
 </div>
 
+<div align="justify">
+<p>
+Os dados estão separados em diversos arquivos, cada um representando um momento específico de um voluntário. O formato do nome do arquivo segue o padrão:
+    <code>&lt;nome do teste&gt;_&lt;ID do voluntário&gt;</code> (por exemplo: voluntário 1 durante o teste alpha: <code>alpha_1</code>).
+</p>
+<p>
+Cada arquivo CSV possui as seguintes colunas:
+</p>
+  <ul>
+    <li><code>Index</code>: Índice do dado no arquivo.</li>
+    <li><code>Fp1</code>: Sinal EEG próximo do lobo frontal do cérebro.</li>
+    <li><code>Fp2</code>: Sinal EEG próximo do lobo frontal do cérebro.</li>
+    <li><code>C3</code>: Sinal EEG próximo do lobo pariental do cérebro.</li>
+    <li><code>C4</code>: Sinal EEG próximo do lobo pariental do cérebro.</li>
+    <li><code>P7</code>: Sinal EEG próximo do lobo temporal do cérebro.</li>
+    <li><code>P8</code>: Sinal EEG próximo do lobo temporal do cérebro.</li>
+    <li><code>O1</code>: Sinal EEG próximo do lobo occiptal do cérebro.</li>
+    <li><code>O2</code>: Sinal EEG próximo do lobo occiptal do cérebro.</li>
+    <li><code>Timestamp</code>: Registro do tempo da coleta em segundos.</li>
+  </ul>
+</div>
+
 <!------------------------------------------------------------------------------------------------------------------------------>
 
 <div align="justify">
