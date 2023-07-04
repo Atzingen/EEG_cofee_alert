@@ -1,6 +1,6 @@
 <h1>README - Projeto EEG_coffee_alert</h1>
 
-<div align="justify">
+<div align="justify"> 
 <h2>Introdução ao projeto</h2>
 <p>
 Bem-vindo ao projeto EEG_coffee_alert! Este é um repositório dedicado a um projeto de análise de dados EEG utilizando Inteligência Artificial. Aqui você encontrará informações sobre a coleta de dados, a estrutura do repositório, detalhes sobre a base de dados utilizada e instruções para montar o ambiente virtual necessário para desenvolver e executar o projeto.
