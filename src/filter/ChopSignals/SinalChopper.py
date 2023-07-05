@@ -6,7 +6,7 @@ import numpy as np
     Corta todos os sinais de um DataFrame por canal de acordo com um arquivo extra de timestamps.
 '''
 
-class ChopSignalsLogic:
+class SinalChopper:
     def __init__(self, df):
         self.csv_df = df
         self.fp1: List[Tuple[float, float]] = []
