@@ -34,7 +34,7 @@ class SignalPlotter:
         self.currentFig = self.figs[channel]
     
     
-    def plot_signal(self, intervals: List[Dict[str,float]]):
+    def plot_signal(self, intervals: List[Dict[str,float]] = []):
         fig = copy.deepcopy(self.currentFig)
         
         fig.update_layout(title = f"{self.csv_file.strip('.csv')} - {self.channel}")
