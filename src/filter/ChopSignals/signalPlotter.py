@@ -36,6 +36,8 @@ class SignalPlotter:
     def plot_signal(self, intervals: List[Dict[str,float]]):
         fig = copy.deepcopy(self.currentFig)
         
+        fig.update_layout(title = f"{self.csv_file.strip('.csv')} - {self.channel}")
+        
         if len(intervals) != 0:
             for interval in intervals:
                 start = interval['start']
@@ -55,6 +57,7 @@ class SignalPlotter:
         with self.output:
             self.output.clear_output()
             fig.show()
+            print(f"xf = {fig.data[0].x.tolist()[-1]}")
 
 
     def __create_fig__(self, channel: str) -> go.Figure:
