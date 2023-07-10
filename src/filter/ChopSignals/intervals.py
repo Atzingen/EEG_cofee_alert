@@ -30,6 +30,10 @@ class Intervals:
     def add_interval(self, channel: str, start: float, end: float):
         self.cutting_intervals[channel].append({'start': start, 'end': end})
 
+
+    def pop_interval(self, channel: str):
+        self.cutting_intervals[channel].pop()
+
         
     def get_cutting_intervals(self, channel: str) -> List[Dict[str,float]]:
         return self.cutting_intervals[channel]
