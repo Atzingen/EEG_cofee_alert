@@ -25,11 +25,12 @@ class SignalPlotter:
         self.csv_file = csv_file
         self.channel = channel
         self.df = pd.read_csv(f'{self.files_path}/{self.csv_file}', delimiter=',')
-        self.figs = {channel:self.__create_fig__(channel) for channel in self.channels}
-        self.currentFig = self.figs['Fp1']
+        self.figs = {channelFor : self.__create_fig__(channelFor) for channelFor in self.channels}
+        self.currentFig = self.figs[channel]
     
     
     def change_current_fig(self, channel: str):
+        self.channel = channel
         self.currentFig = self.figs[channel]
     
     
@@ -63,5 +64,5 @@ class SignalPlotter:
     def __create_fig__(self, channel: str) -> go.Figure:
         channel_data = self.df[channel].to_numpy()
         timestamps = self.df['Timestamp'].to_numpy()
-        fig = px.line(x=timestamps, y=channel_data)
+        fig = px.line(x = timestamps, y = channel_data)
         return fig
