@@ -13,7 +13,7 @@ class Intervals:
 
         
     def load_cutting_intervals(self, csv_file):
-        self.filename = csv_file.strip('.csv')
+        self.filename = csv_file.replace('.csv','')
         self.cutting_intervals = {channel: [] for channel in self.channels}
         try:
             with open(f'cuttingIntervals/chop_{self.filename}.json', 'r') as file:
