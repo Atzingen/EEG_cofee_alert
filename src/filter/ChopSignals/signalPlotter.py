@@ -37,7 +37,7 @@ class SignalPlotter:
     def plot_signal(self, intervals: List[Dict[str,float]] = []):
         fig = copy.deepcopy(self.currentFig)
         
-        fig.update_layout(title = f"{self.csv_file.strip('.csv')} - {self.channel}")
+        fig.update_layout(title = f"{self.csv_file.replace('.csv','')} - {self.channel}")
         
         if len(intervals) != 0:
             for interval in intervals:
