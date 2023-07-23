@@ -2,7 +2,7 @@ import pandas as pd
 
 # Type this file
 
-class RawDataFilter:
+class DataFilter:
     def __init__(self, dfs):
         self.raw_dfs = dfs
         self.filtered_dfs = []
@@ -30,4 +30,5 @@ class RawDataFilter:
             raise Exception('[ERROR] Cannot write files by empty list! Filter DFs first.')
 
         for index, df in enumerate(self.filtered_dfs):
-            df.to_csv(f'filtered/{file_names[index]}')
+            df.to_csv(f'dataset_eeg_cafe2022/filtered/{file_names[index]}')
+
