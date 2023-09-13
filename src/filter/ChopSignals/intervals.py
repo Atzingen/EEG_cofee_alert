@@ -4,8 +4,7 @@ from typing import List, Dict
 
 class Intervals:
     
-    def __init__(self, files_path: str):
-        self.files_path = files_path
+    def __init__(self):
         self.channels = ['Fp1', 'Fp2', 'C3', 'C4', 'P7', 'P8', 'O1', 'O2']
         
         self.filename = None
