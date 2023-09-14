@@ -7,12 +7,13 @@ import numpy as np
 '''
 
 class SignalChopper:
-    def __init__(self, files_path: str):
+    def __init__(self, files_path: str, chop_files_path):
         self.files_path = files_path
+        self.chop_files_path = chop_files_path
         self.channels = ['Fp1', 'Fp2', 'C3', 'C4', 'P7', 'P8', 'O1', 'O2']
 
         self.df = None
-        self.intervals = Intervals()
+        self.intervals = Intervals(self.chop_files_path)
         self.csv_file = None
 
 
