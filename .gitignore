@@ -132,3 +132,5 @@ dmypy.json
 .pyre/
 
 /dataset_eeg_cafe2022/
+src/data/rawSignalFiles/*.csv
+src/data/treatedSignalFiles/*.csv
