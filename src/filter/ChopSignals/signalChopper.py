@@ -13,9 +13,11 @@ class SignalChopper:
 
         self.df = None
         self.intervals = Intervals()
+        self.csv_file = None
 
 
     def set_chopper(self, csv_file: str):
+        self.csv_file = csv_file
         self.df = pd.read_csv(f'{self.files_path}/{csv_file}', delimiter=',')
         self.intervals.load_cutting_intervals(csv_file)
 
@@ -24,6 +26,10 @@ class SignalChopper:
         for channel in self.channels:
             for interval in self.intervals.get_cutting_intervals(channel):
                 self.__chop_signal__(interval['start'], interval['end'], channel)
+
+
+    def save_data(self, save_path: str):
+        self.df.to_csv(f'{save_path}/{self.csv_file}')
 
 
     def __chop_signal__(self, start, end, channel_name):
