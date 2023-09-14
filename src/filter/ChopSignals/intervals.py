@@ -4,8 +4,9 @@ from typing import List, Dict
 
 class Intervals:
     
-    def __init__(self):
+    def __init__(self, chop_files_path: str):
         self.channels = ['Fp1', 'Fp2', 'C3', 'C4', 'P7', 'P8', 'O1', 'O2']
+        self.chop_files_path = chop_files_path
         
         self.filename = None
         self.cutting_intervals = None
@@ -15,14 +16,14 @@ class Intervals:
         self.filename = csv_file.replace('.csv','')
         self.cutting_intervals = {channel: [] for channel in self.channels}
         try:
-            with open(f'cuttingIntervals/chop_{self.filename}.json', 'r') as file:
+            with open(f'{self.chop_files_path}/chop_{self.filename}.json', 'r') as file:
                 self.cutting_intervals = json.load(file)
         except FileNotFoundError:
                 self.cutting_intervals = {channel: [] for channel in self.channels}
 
 
     def save_cutting_intervals(self):
-            with open(f'cuttingIntervals/chop_{self.filename}.json', 'w') as file:
+            with open(f'{self.chop_files_path}/chop_{self.filename}.json', 'w') as file:
                 json.dump(self.cutting_intervals, file)
 
                 
