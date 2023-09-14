@@ -6,7 +6,7 @@ import numpy as np
     Corta todos os sinais de um DataFrame por canal de acordo com um arquivo extra de timestamps.
 '''
 
-class SinalChopper:
+class SignalChopper:
     def __init__(self, files_path: str):
         self.files_path = files_path
         self.channels = ['Fp1', 'Fp2', 'C3', 'C4', 'P7', 'P8', 'O1', 'O2']
