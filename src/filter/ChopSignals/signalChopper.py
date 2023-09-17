@@ -7,6 +7,7 @@ import numpy as np
 '''
 
 class SignalChopper:
+    
     def __init__(self, files_path: str, chop_files_path):
         self.files_path = files_path
         self.chop_files_path = chop_files_path
