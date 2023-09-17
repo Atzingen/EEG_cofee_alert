@@ -20,3 +20,11 @@ class Utils:
                     os.rename(f"main-session_cafe-{exp}_{coffee_signal_number}_formatted.csv",f"cafe-{coffee_signal_number}_{exp}.csv")
                 except OSError:
                     continue
+
+    @classmethod
+    def get_data_from_bucket(cls):
+        '''
+            #!/bin/bash
+            gsutil cp -r gs://dataset_eeg_cafe2022 ./
+        '''
+        pass
