@@ -20,3 +20,14 @@ class FileManager:
                     os.rename(f"main-session_cafe-{exp}_{coffee_signal_number}_formatted.csv",f"cafe-{coffee_signal_number}_{exp}.csv")
                 except OSError:
                     continue
+
+
+    @classmethod
+    def write_csvs_in_path(cls, path, dfs):
+        if len(dfs) == 0:
+            raise Exception('[ERROR] Cannot write files by empty list!')
+
+        for index, df in enumerate(dfs):
+            df.to_csv(f'{path}/{dfs[index]}')
+
+

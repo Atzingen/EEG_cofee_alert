@@ -25,11 +25,3 @@ class Formatter:
             self.formatted_dfs.append(df)
 
 
-    #REMOVE THIS
-    def write_filtered_csvs(self, file_names):
-        if len(self.formatted_dfs) == 0:
-            raise Exception('[ERROR] Cannot write files by empty list! Format DFs first.')
-
-        for index, df in enumerate(self.formatted_dfs):
-            df.to_csv(f'dataset_eeg_cafe2022/formatted/{file_names[index]}')
-
