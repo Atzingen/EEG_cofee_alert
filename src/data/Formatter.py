@@ -2,10 +2,10 @@ import pandas as pd
 
 # Type this file
 
-class DataFilter:
+class Formatter:
     def __init__(self, dfs):
         self.raw_dfs = dfs
-        self.filtered_dfs = []
+        self.formatted_dfs = []
 
 
     def set_initial_and_final_timestamps(self):
@@ -22,13 +22,14 @@ class DataFilter:
 
             df = df.drop(labels=other_columns, axis=1)
 
-            self.filtered_dfs.append(df)
+            self.formatted_dfs.append(df)
 
 
+    #REMOVE THIS
     def write_filtered_csvs(self, file_names):
-        if len(self.filtered_dfs) == 0:
-            raise Exception('[ERROR] Cannot write files by empty list! Filter DFs first.')
+        if len(self.formatted_dfs) == 0:
+            raise Exception('[ERROR] Cannot write files by empty list! Format DFs first.')
 
-        for index, df in enumerate(self.filtered_dfs):
-            df.to_csv(f'dataset_eeg_cafe2022/filtered/{file_names[index]}')
+        for index, df in enumerate(self.formatted_dfs):
+            df.to_csv(f'dataset_eeg_cafe2022/formatted/{file_names[index]}')
 
