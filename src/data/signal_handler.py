@@ -6,7 +6,7 @@ import plotly.graph_objects as go
 from ipywidgets import Output
 from typing import List, Dict
 
-from intervals import CutIntervals
+from src.data.trunc_intervals import TruncIntervals
 
 '''
     Corta todos os sinais de um DataFrame por canal de 
@@ -52,30 +52,30 @@ class Plotter:
         self.output = output
         self.channels = ['Fp1', 'Fp2', 'C3', 'C4', 'P7', 'P8', 'O1', 'O2']
         
-        self.csv_file = None
+        self.csv_filename = None
         self.channel = None
         self.df = None
         self.figs = None
-        self.currentFig = None
+        self.current_fig = None
 
 
-    def load_signal(self, csv_file: str, channel: str):
-        self.csv_file = csv_file
+    def load_signal(self, filename: str, channel: str):
+        self.csv_filename = filename
         self.channel = channel
-        self.df = pd.read_csv(f'{self.files_path}/{self.csv_file}', delimiter=',')
-        self.figs = {channelFor : self.__create_fig(channelFor) for channelFor in self.channels}
-        self.currentFig = self.figs[channel]
+        self.df = pd.read_csv(f'{self.files_path}/{self.csv_filename}', delimiter=',')
+        self.figs = {channel : self.__create_fig(channel) for channel in self.channels}
+        self.current_fig = self.figs[channel]
     
     
     def change_current_fig(self, channel: str):
         self.channel = channel
-        self.currentFig = self.figs[channel]
+        self.current_fig = self.figs[channel]
     
     
     def plot_signal(self, intervals: List[Dict[str,float]] = []):
-        fig = copy.deepcopy(self.currentFig)
+        fig = copy.deepcopy(self.current_fig)
         
-        fig.update_layout(title = f"{self.csv_file.replace('.csv','')} - {self.channel}")
+        fig.update_layout(title = f"{self.csv_filename.replace('.csv','')} - {self.channel}")
         
         if len(intervals) != 0:
             for interval in intervals:
@@ -103,4 +103,7 @@ class Plotter:
         channel_data = self.df[channel].to_numpy()
         timestamps = self.df['Timestamp'].to_numpy()
         fig = px.line(x = timestamps, y = channel_data)
+        
         return fig
+
+
