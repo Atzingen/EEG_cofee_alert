@@ -11,7 +11,7 @@ class TruncIntervals:
         self.file_intervals = None
 
         
-    def load_cutting_intervals(self, csv_file):
+    def load_file_intervals(self, csv_file):
         self.filename = csv_file.replace('.csv','')
         self.file_intervals = {channel: [] for channel in self.channels}
         
@@ -22,20 +22,20 @@ class TruncIntervals:
                 self.file_intervals = {channel: [] for channel in self.channels}
 
 
-    def save_cutting_intervals(self):
+    def save_current_file_intervals(self):
             with open(f'{self.trunc_intervals_path}/chop_{self.filename}.json', 'w') as file:
                 json.dump(self.file_intervals, file)
 
                 
-    def add_interval(self, channel: str, start: float, end: float):
+    def add_interval_by_channel(self, channel: str, start: float, end: float):
         self.file_intervals[channel].append({'start': start, 'end': end})
 
 
-    def pop_interval(self, channel: str):
+    def pop_interval_by_channel(self, channel: str):
         self.file_intervals[channel].pop()
 
         
-    def get_cutting_intervals(self, channel: str) -> List[Dict[str,float]]:
+    def get_channel_intervals(self, channel: str) -> List[Dict[str,float]]:
         return self.file_intervals[channel]
 
 
