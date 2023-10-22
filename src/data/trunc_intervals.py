@@ -16,14 +16,14 @@ class TruncIntervals:
         self.file_intervals = {channel: [] for channel in self.channels}
         
         try:
-            with open(f'{self.trunc_intervals_path}/chop_{self.filename}.json', 'r') as file:
+            with open(f'{self.trunc_intervals_path}/{self.filename}.json', 'r') as file:
                 self.file_intervals = json.load(file)
         except FileNotFoundError:
                 self.file_intervals = {channel: [] for channel in self.channels}
 
 
     def save_current_file_intervals(self):
-            with open(f'{self.trunc_intervals_path}/chop_{self.filename}.json', 'w') as file:
+            with open(f'{self.trunc_intervals_path}/{self.filename}.json', 'w') as file:
                 json.dump(self.file_intervals, file)
 
                 
