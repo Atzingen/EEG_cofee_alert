@@ -8,12 +8,14 @@ class Paths:
         RENAMED = 1
         FORMATTED = 2
         TRUNCATED = 3
+        TRUNC_JSONS = 4
 
     __resource_paths = {
         0: 'dataset_eeg_cafe2022/raw',
         1: 'dataset_eeg_cafe2022/renamed',
         2: 'dataset_eeg_cafe2022/formatted',
-        3: 'dataset_eeg_cafe2022/truncated'
+        3: 'dataset_eeg_cafe2022/truncated',
+        4: 'assets/trunc_intervals'
     }
 
 
