@@ -33,10 +33,7 @@ class Truncate:
             for interval in self.trunc_intervals.get_channel_intervals(channel):
                 self.__replace_with_nan(interval['start'], interval['end'], channel)
 
-
-    # remove this, use FileManager
-    def save_data(self, save_path: str):
-        self.df.to_csv(f'{save_path}/{self.csv_filename}')
+        return self.df
 
 
     def __replace_with_nan(self, start, end, channel_name):

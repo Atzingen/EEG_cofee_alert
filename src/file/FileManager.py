@@ -22,12 +22,15 @@ class FileManager:
                     continue
 
 
-    @classmethod
-    def write_csvs_in_path(cls, path, dfs):
+    @staticmethod
+    def write_csvs_in_path(path, dfs, filenames):
         if len(dfs) == 0:
             raise Exception('[ERROR] Cannot write files by empty list!')
 
+        if not os.path.exists(path): 
+            os.mkdir(path)
+
         for index, df in enumerate(dfs):
-            df.to_csv(f'{path}/{dfs[index]}')
+            df.to_csv(f'{path}/{filenames[index]}')
 
 
