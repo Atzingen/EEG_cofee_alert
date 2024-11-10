@@ -1,7 +1,6 @@
 import os 
 import shutil
-
-from src.setup.Paths import Paths
+from enum import Enum
 
 
 class FileManager:
@@ -52,4 +51,36 @@ class FileManager:
 
         for index, df in enumerate(data_frames):
             df.to_csv(f'{path}/{filenames[index]}')
+
+    @staticmethod
+    def get_data_from_bucket():
+        '''
+            #!/bin/bash
+            gsutil cp -r gs://dataset_eeg_cafe2022 ./
+        '''
+        pass
+
+
+
+class Paths:
+    class Resources(Enum):
+        RAW = 0
+        RENAMED = 1
+        FORMATTED = 2
+        TRUNCATED = 3
+        TRUNC_JSONS = 4
+
+    __resource_paths = {
+        0: 'dataset_eeg_cafe2022/raw',
+        1: 'dataset_eeg_cafe2022/renamed',
+        2: 'dataset_eeg_cafe2022/formatted',
+        3: 'dataset_eeg_cafe2022/truncated',
+        4: 'assets/trunc_intervals'
+    }
+
+    @staticmethod
+    def get_resource_path(resource: Resources) -> str:
+        file_directory = os.dirname(__file__)
+        project_directory = os.realpath(os.join(file_directory, '..', '..'))
+        return join(project_directory, Paths.__resource_paths[resource.value])
 

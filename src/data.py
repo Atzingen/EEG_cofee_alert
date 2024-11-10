@@ -5,14 +5,36 @@ import plotly.express as px
 import plotly.graph_objects as go
 from ipywidgets import Output
 from typing import List, Dict
+import json
 
-from src.data.trunc_intervals import TruncIntervals
 
-'''
-    Corta todos os sinais de um DataFrame por canal de 
-    acordo com um arquivo extra de timestamps.
-'''
+class Formatter:
+    def __init__(self, dfs):
+        self.raw_dfs = dfs
+        self.formatted_dfs = []
+
+
+    def set_initial_and_final_timestamps(self):
+        for df in self.raw_dfs:
+            df['Timestamp'] = df['Timestamp'] - df['Timestamp'].min()
+
+
+    def remove_other_columns(self):
+        for df in self.raw_dfs:
+            other_columns = df.columns.to_list()[10:23]
+            other_columns.append('other.13')
+            other_columns.append('Unnamed: 0')
+            other_columns.append('Timestamp (Formatted)')
+
+            df = df.drop(labels=other_columns, axis=1)
+
+            self.formatted_dfs.append(df)
+
 class Truncate:
+    """
+        Corta todos os sinais de um DataFrame por canal de 
+        acordo com um arquivo extra de timestamps.
+    """
     def __init__(self, files_path: str, trunc_intervals_path):
         self.files_path = files_path
         self.channels = ['Fp1', 'Fp2', 'C3', 'C4', 'P7', 'P8', 'O1', 'O2']
@@ -40,10 +62,10 @@ class Truncate:
         self.df.loc[(self.df['Timestamp'] >= start) & (self.df['Timestamp'] <= end), channel_name] = np.nan
 
 
-'''
-    Responsável pela criação das figuras e gráficos dos sinais
-'''
 class Plotter:
+    """
+        Responsável pela criação das figuras e gráficos dos sinais
+    """
     def __init__(self, files_path: str, output: Output):
         self.files_path = files_path
         self.output = output
@@ -102,5 +124,41 @@ class Plotter:
         fig = px.line(x = timestamps, y = channel_data)
         
         return fig
+
+class TruncIntervals:
+    def __init__(self, trunc_intervals_path: str):
+        self.channels = ['Fp1', 'Fp2', 'C3', 'C4', 'P7', 'P8', 'O1', 'O2']
+        self.trunc_intervals_path = trunc_intervals_path
+        
+        self.filename = None
+        self.file_intervals = None
+
+        
+    def load_file_intervals(self, csv_file):
+        self.filename = csv_file.replace('.csv','')
+        self.file_intervals = {channel: [] for channel in self.channels}
+        
+        try:
+            with open(f'{self.trunc_intervals_path}/{self.filename}.json', 'r') as file:
+                self.file_intervals = json.load(file)
+        except FileNotFoundError:
+                self.file_intervals = {channel: [] for channel in self.channels}
+
+
+    def save_current_file_intervals(self):
+            with open(f'{self.trunc_intervals_path}/{self.filename}.json', 'w') as file:
+                json.dump(self.file_intervals, file)
+
+                
+    def add_interval_by_channel(self, channel: str, start: float, end: float):
+        self.file_intervals[channel].append({'start': start, 'end': end})
+
+
+    def pop_interval_by_channel(self, channel: str):
+        self.file_intervals[channel].pop()
+
+        
+    def get_channel_intervals(self, channel: str) -> List[Dict[str,float]]:
+        return self.file_intervals[channel]
 
 
