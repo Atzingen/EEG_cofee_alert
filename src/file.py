@@ -1,24 +1,39 @@
+from pathlib import Path
 import os 
 import shutil
-from enum import Enum
 
 
-class FileManager:
+class File:
+    __source_path = Path(__file__).parent.resolve()
+    __project_path = Path(__source_path).parent.resolve()
+
+    __resource_paths = {
+        "raw": "dataset_eeg_cafe2022/raw",
+        "renamed": "dataset_eeg_cafe2022/renamed",
+        "formatted": "dataset_eeg_cafe2022/formatted",
+        "truncated": "dataset_eeg_cafe2022/truncated",
+        "truncation_intervals": "assets/truncation_intervals"
+    }
+
     @staticmethod
     def __create_path_if_not_exists(path: str) -> None:
         if not os.path.exists(path):
             os.mkdir(path)
 
-    @staticmethod
-    def rename_raw_files():
-        raw = Paths.get_resource_path(Paths.Resources.RAW)
-        renamed = Paths.get_resource_path(Paths.Resources.RENAMED)
+    @classmethod
+    def get_path_by(cls, resource_name: str) -> Path:
+        return Path(cls.__project_path, cls.__resource_paths[resource_name])
+
+    @classmethod
+    def rename_raw_files(cls):
+        raw = cls.__resource_paths["raw"]
+        renamed = cls.__resource_paths["renamed"]
 
         signal_types = ["alpha", "chimp", "seq", "react"]
         exp_numbers = list(range(1, 22))
         coffee_signal_numbers = list(range(1, 3))
 
-        FileManager.__create_path_if_not_exists(renamed)
+        cls.__create_path_if_not_exists(renamed)
 
         for sig_t in signal_types:
             for exp in exp_numbers:
@@ -47,7 +62,7 @@ class FileManager:
         if len(data_frames) == 0:
             raise Exception('[ERROR] Cannot write files by empty list!')
 
-        FileManager.__create_path_if_not_exists(path)
+        File.__create_path_if_not_exists(path)
 
         for index, df in enumerate(data_frames):
             df.to_csv(f'{path}/{filenames[index]}')
@@ -59,28 +74,4 @@ class FileManager:
             gsutil cp -r gs://dataset_eeg_cafe2022 ./
         '''
         pass
-
-
-
-class Paths:
-    class Resources(Enum):
-        RAW = 0
-        RENAMED = 1
-        FORMATTED = 2
-        TRUNCATED = 3
-        TRUNC_JSONS = 4
-
-    __resource_paths = {
-        0: 'dataset_eeg_cafe2022/raw',
-        1: 'dataset_eeg_cafe2022/renamed',
-        2: 'dataset_eeg_cafe2022/formatted',
-        3: 'dataset_eeg_cafe2022/truncated',
-        4: 'assets/trunc_intervals'
-    }
-
-    @staticmethod
-    def get_resource_path(resource: Resources) -> str:
-        file_directory = os.dirname(__file__)
-        project_directory = os.realpath(os.join(file_directory, '..', '..'))
-        return join(project_directory, Paths.__resource_paths[resource.value])
 
