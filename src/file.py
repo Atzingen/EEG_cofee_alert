@@ -1,6 +1,8 @@
-from pathlib import Path
+import pandas as pd
 import os 
 import shutil
+from pathlib import Path
+from typing import List
 
 
 class File:
@@ -58,13 +60,15 @@ class File:
                     continue
 
     @staticmethod
-    def write_csvs_in(path, data_frames, filenames):
-        if len(data_frames) == 0:
+    def write_dataframes_in(path: str,
+                            dataframes: List[pd.DataFrame],
+                            filenames: List[str]):
+        if len(dataframes) == 0:
             raise Exception('[ERROR] Cannot write files by empty list!')
 
         File.__create_path_if_not_exists(path)
 
-        for index, df in enumerate(data_frames):
+        for index, df in enumerate(dataframes):
             df.to_csv(f'{path}/{filenames[index]}')
 
     @staticmethod
