@@ -13,6 +13,7 @@ class File:
         "renamed": "dataset_eeg_cafe2022/renamed",
         "formatted": "dataset_eeg_cafe2022/formatted",
         "truncated": "dataset_eeg_cafe2022/truncated",
+        "continuous": "dataset_eeg_cafe2022/continuous",
         "truncation_intervals": "assets/truncation_intervals"
     }
     __signal_types = ["alpha", "cafe", "chimp", "seq", "react"]
