@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import List
+from typing import List, Tuple
 from math import floor
 from random import Random
 import pandas as pd
@@ -93,7 +93,7 @@ class File:
     def _randomize(cls,
                    files: List[str],
                    test_proportion: float = 0.3,
-                   seed: int = 42) -> tuple[List[str], List[str]]:
+                   seed: int = 42) -> Tuple[List[str], List[str]]:
         randomizer = Random()
         randomizer.seed(a=seed)
 
@@ -108,7 +108,7 @@ class File:
     def _copy_train_test_files_from(cls,
                                     origin: Path,
                                     to: Path,
-                                    samples: tuple[List[str], List[str]]) \
+                                    samples: Tuple[List[str], List[str]]) \
                                     -> None:
         (train, test) = samples
 
