@@ -17,7 +17,8 @@ class File:
         "truncated": "dataset_eeg_cafe2022/truncated",
         "continuous": "dataset_eeg_cafe2022/continuous",
         "pre_training": "dataset_eeg_cafe2022/pre_training",
-        "truncation_intervals": "assets/truncation_intervals"
+        "truncation_intervals": "assets/truncation_intervals",
+        "pre_calculated_truncation_intervals": "assets/pre_calculated_truncation_intervals"
     }
     __signal_types = ["alpha", "cafe-1", "cafe-2", "chimp", "seq", "react"]
     __experiment_numbers = list(range(1, 22))
@@ -51,16 +52,16 @@ class File:
     @classmethod
     def get_files_from(cls, resource: str) -> List[str]:
         return [file for file \
-                in os.listdir(cls.get_path_by(resource_name=resource))]
+                in os.listdir(cls.get_path_by(resource=resource))]
 
     @classmethod
-    def get_path_by(cls, resource_name: str) -> Path:
-        return Path(cls.__project_path, cls.__resource_paths[resource_name])
+    def get_path_by(cls, resource: str) -> Path:
+        return Path(cls.__project_path, cls.__resource_paths[resource])
 
     @classmethod
     def rename_raw_files(cls):
-        raw = cls.get_path_by(resource_name="raw")
-        renamed = cls.get_path_by(resource_name="renamed")
+        raw = cls.get_path_by(resource="raw")
+        renamed = cls.get_path_by(resource="renamed")
 
         cls.create_path_if_not_exists(renamed)
 
@@ -134,8 +135,8 @@ class File:
 
     @classmethod
     def generate_train_test_files(cls):
-        continuous = cls.get_path_by(resource_name="continuous")
-        pre_training = cls.get_path_by(resource_name="pre_training")
+        continuous = cls.get_path_by(resource="continuous")
+        pre_training = cls.get_path_by(resource="pre_training")
 
         cls._create_train_test_file_structure_in(parent_dir=pre_training)
 

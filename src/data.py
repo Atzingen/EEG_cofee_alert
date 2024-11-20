@@ -47,7 +47,6 @@ class Truncate:
     def __init__(self, files_path: str, trunc_intervals_path):
         self.files_path = files_path
         self.channels = ['Fp1', 'Fp2', 'C3', 'C4', 'P7', 'P8', 'O1', 'O2']
-
         self.df = None
         self.trunc_intervals = TruncateIntervals(trunc_intervals_path)
         self.csv_filename = None
