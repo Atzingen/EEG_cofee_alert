@@ -1,12 +1,15 @@
-import os
-import pandas as pd
-import numpy as np
-import copy
-import plotly.express as px
-import plotly.graph_objects as go
 from ipywidgets import Output
 from typing import List, Dict, Optional
+from pathlib import Path
+import plotly.express as px
+import plotly.graph_objects as go
+import pandas as pd
+import numpy as np
+import os
+import copy
 import json
+
+from src.file import File
 
 
 class Formatter:
@@ -146,6 +149,8 @@ class TruncateIntervals:
         
         self.__filename: Optional[str] = None
         self.__file_intervals: Dict[str, List[Dict[str, float]]] = None
+
+        File.create_path_if_not_exists(path=Path(truncate_intervals_path))
 
     def load_file_intervals(self, csv_file_path: str) -> None:
         """
