@@ -1,8 +1,10 @@
+from pathlib import Path
+from typing import List
+from math import floor
+from random import Random
 import pandas as pd
 import os 
 import shutil
-from pathlib import Path
-from typing import List
 
 
 class File:
@@ -14,9 +16,10 @@ class File:
         "formatted": "dataset_eeg_cafe2022/formatted",
         "truncated": "dataset_eeg_cafe2022/truncated",
         "continuous": "dataset_eeg_cafe2022/continuous",
+        "pre_training": "dataset_eeg_cafe2022/pre_training",
         "truncation_intervals": "assets/truncation_intervals"
     }
-    __signal_types = ["alpha", "cafe", "chimp", "seq", "react"]
+    __signal_types = ["alpha", "cafe-1", "cafe-2", "chimp", "seq", "react"]
     __coffee_type_numbers = list(range(1, 3))
     __experiment_numbers = list(range(1, 22))
 
@@ -75,6 +78,8 @@ class File:
                     print(e)
                     continue
 
+        # Mudar essa lógica aqui
+        # dá pra juntar tudo no for de cima
         for cff_t in cls.__coffee_type_numbers:
             for exp in cls.__experiment_numbers:
                 try:
@@ -85,4 +90,72 @@ class File:
                 except Exception as e:
                     print(e)
                     continue
+
+    @classmethod
+    def _generate_train_test_file_structure_in(cls, parent_dir: Path) -> None:
+        cls.__create_path_if_not_exists(path=str(parent_dir))
+
+        dirs_by_signal_type = [d if not d.endswith(("-1", "-2")) else "cafe" \
+                               for d in cls.__signal_types]
+
+        for sig_t in dirs_by_signal_type:
+            for inner_dir in ["test", "train"]:
+                dest_path = Path(parent_dir,
+                                 f"{sig_t}/{inner_dir}")
+
+                os.makedirs(name=str(dest_path), exist_ok=True)
+
+    @classmethod
+    def _randomize(cls,
+                   files: List[str],
+                   test_proportion: float = 0.3,
+                   seed: int = 42) -> tuple[List[str], List[str]]:
+        randomizer = Random()
+        randomizer.seed(a=seed)
+
+        randomizer.shuffle(files)
+
+        test_amount = floor(test_proportion * len(files))
+        train_amount = len(files) - test_amount
+
+        return (files[:train_amount], files[train_amount:])
+
+    @classmethod
+    def _copy_train_test_files_from(cls,
+                                    origin: Path,
+                                    to: Path,
+                                    samples: tuple[List[str], List[str]]) \
+                                    -> None:
+        (train, test) = samples
+
+        for file in train:
+            src = Path(origin, file)
+            dst = Path(to, file, "train")
+
+            shutil.copy(src=src, dst=dst)
+
+        for file in test:
+            src = Path(origin, file)
+            dst = Path(to, file, "test")
+
+            shutil.copy(src=src, dst=dst)
+
+    @classmethod
+    def generate_train_test_files(cls):
+        continuous = cls.get_path_by(resource_name="continuous")
+        pre_training = cls.get_path_by(resource_name="pre_training")
+
+        cls._generate_train_test_file_structure_in(parent_dir=pre_training)
+
+        files = [file for file in os.listdir(continuous)]
+
+        for sig_t in cls.__signal_types:
+            sig_t_files = [file for file in files if file.startswith(sig_t)]
+
+            cls._copy_train_test_files_from(
+                origin=continuous,
+                to=Path(pre_training,
+                          sig_t if not sig_t.startswith("cafe") else "cafe"),
+                samples=cls._randomize(files=sig_t_files)
+            )
 
