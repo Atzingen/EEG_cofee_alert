@@ -201,3 +201,91 @@ class TruncateIntervals:
             List[Dict[str, float]]: Lista de dicionários com os intervalos de início e fim para o canal.
         """
         return self.__file_intervals[channel]
+
+
+class Continuous:
+    """
+    A classe `Continuous` é responsável por transformar arquivos de dados truncados em
+    múltiplos arquivos contínuos com base em intervalos definidos em arquivos JSON.
+
+    Args:
+        input_data_path (str): Caminho para os arquivos de dados truncados.
+        output_data_path (str): Local onde os segmentos contínuos serão salvos.
+        truncate_intervals_path (str): Caminho para os arquivos de intervalos de corte.
+    """
+
+    def __init__(self, input_data_path: str, output_data_path: str, truncate_intervals_path: str) -> None:
+        self.input_data_path: str = input_data_path
+        self.output_data_path: str = output_data_path
+        self.truncate_intervals: TruncateIntervals = TruncateIntervals(truncate_intervals_path)
+
+    def process_file(self, csv_file_path: str) -> None:
+        """
+        Processa um arquivo de dados truncados, segmentando-o em arquivos contínuos
+        com base nos intervalos unificados definidos em todos os canais.
+
+        Args:
+            csv_file_path (str): Caminho para o arquivo CSV de dados.
+        """
+        self.truncate_intervals.load_file_intervals(csv_file_path)
+
+        data = pd.read_csv(f'{self.input_data_path}/{csv_file_path}')
+
+        all_intervals = self._unify_intervals()
+
+        if all_intervals:
+            self._split_and_save(data, all_intervals, csv_file_path)
+
+    def _unify_intervals(self) -> list:
+        """
+        Unifica os intervalos de todos os canais para gerar uma lista geral de cortes.
+
+        Returns:
+            list: Lista de intervalos unificados, com cada elemento sendo um dicionário {'start': float, 'end': float}.
+        """
+        unified_intervals = []
+        for channel in self.truncate_intervals.channels:
+            channel_intervals = self.truncate_intervals.get_channel_intervals(channel)
+            unified_intervals.extend(channel_intervals)
+
+        unified_intervals = sorted(unified_intervals, key=lambda x: x['start'])
+        merged_intervals = []
+        for interval in unified_intervals:
+            if not merged_intervals or interval['start'] > merged_intervals[-1]['end']:
+                merged_intervals.append(interval)
+            else:
+                merged_intervals[-1]['end'] = max(merged_intervals[-1]['end'], interval['end'])
+
+        return merged_intervals
+
+    def _split_and_save_excluding_intervals(self, data: pd.DataFrame, intervals: list, csv_file_path: str) -> None:
+        """
+        Divide os dados em segmentos que estão fora dos intervalos fornecidos.
+
+        Args:
+            data (pd.DataFrame): DataFrame com os dados originais.
+            intervals (list): Lista de intervalos com 'start' e 'end'.
+            csv_file_path (str): Caminho do arquivo de entrada.
+        """
+        base_filename = csv_file_path.replace('.csv', '')
+        valid_segments = []
+        current_start = 0
+
+        for interval in intervals:
+            start, end = interval['start'], interval['end']
+
+            if current_start < start:
+                segment = data[(data['Timestamp'] >= current_start) & (data['Timestamp'] < start)].copy()
+                if len(segment) > 1:
+                    valid_segments.append(segment)
+
+            current_start = end
+
+        if current_start < data['Timestamp'].iloc[-1]:
+            segment = data[data['Timestamp'] >= current_start].copy()
+            if len(segment) > 1:
+                valid_segments.append(segment)
+
+        for idx, segment in enumerate(valid_segments):
+            output_filename = f'{base_filename}_{idx + 1}.csv'
+            segment.to_csv(f'{self.output_data_path}/{output_filename}', index=False)
