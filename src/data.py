@@ -234,7 +234,9 @@ class Continuous:
         all_intervals = self._unify_intervals()
 
         if all_intervals:
-            self._split_and_save(data, all_intervals, csv_file_path)
+            self._split_and_save_excluding_intervals(data,
+                                                     all_intervals,
+                                                     csv_file_path)
 
     def _unify_intervals(self) -> list:
         """
@@ -289,3 +291,4 @@ class Continuous:
         for idx, segment in enumerate(valid_segments):
             output_filename = f'{base_filename}_{idx + 1}.csv'
             segment.to_csv(f'{self.output_data_path}/{output_filename}', index=False)
+
