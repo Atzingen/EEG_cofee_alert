@@ -59,7 +59,7 @@ class File:
         return Path(cls.__project_path, cls.__resource_paths[resource])
 
     @classmethod
-    def rename_raw_files(cls):
+    def rename_raw_files(cls) -> None:
         raw = cls.get_path_by(resource="raw")
         renamed = cls.get_path_by(resource="renamed")
 
@@ -123,18 +123,18 @@ class File:
 
         for file in train:
             src = Path(origin, file)
-            dst = Path(to, file, "train")
+            dst = Path(to, "train", file)
 
             shutil.copy(src=src, dst=dst)
 
         for file in test:
             src = Path(origin, file)
-            dst = Path(to, file, "test")
+            dst = Path(to, "test", file)
 
             shutil.copy(src=src, dst=dst)
 
     @classmethod
-    def generate_train_test_files(cls):
+    def generate_train_test_files(cls) -> None:
         continuous = cls.get_path_by(resource="continuous")
         pre_training = cls.get_path_by(resource="pre_training")
 
@@ -151,4 +151,18 @@ class File:
                           sig_t if not sig_t.startswith("cafe") else "cafe"),
                 samples=cls._randomize(files=sig_t_files)
             )
+
+    @classmethod
+    def add_not_fragmented_files_to_continuous(cls) -> None:
+        formatted = cls.get_files_from(resource="formatted")
+        truncated = cls.get_files_from(resource="truncated")
+
+        formatted_path = cls.get_path_by(resource="formatted")
+        continuous_path = cls.get_path_by(resource="continuous")
+
+        missing_files = list(set(formatted) - set(truncated))
+
+        for file in missing_files:
+            shutil.copy(src=Path(formatted_path, file),
+                        dst=Path(continuous_path, file))
 

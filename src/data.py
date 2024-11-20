@@ -223,6 +223,8 @@ class Continuous:
         self.output_data_path: str = output_data_path
         self.truncate_intervals: TruncateIntervals = TruncateIntervals(truncate_intervals_path)
 
+        File.create_path_if_not_exists(path=Path(output_data_path))
+
     def process_file(self, csv_file_path: str) -> None:
         """
         Processa um arquivo de dados truncados, segmentando-o em arquivos contínuos
