@@ -65,10 +65,19 @@ class File:
         cls.create_path_if_not_exists(renamed)
 
         for sig_t in cls.__signal_types:
+            raw_file_format = \
+                "main-session_{sig_t}-{exp}_formatted.csv" \
+                if not sig_t.startswith("cafe") \
+                else "main-session_cafe-{exp}_{coffee_number}_formatted.csv"
+            coffee_number = 1 if sig_t == "cafe-1" else 2
+
             for exp in cls.__experiment_numbers:
+                raw_file = raw_file_format.format(sig_t=sig_t,
+                                                  exp=exp,
+                                                  coffee_number=coffee_number)
                 try:
                     shutil.copyfile(
-                        f"{raw}/main-session_{sig_t}-{exp}_formatted.csv",
+                        f"{raw}/{raw_file}",
                         f"{renamed}/{sig_t}_{exp}.csv"
                     )
                 except Exception:
