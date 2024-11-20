@@ -65,27 +65,11 @@ class File:
         cls.__create_path_if_not_exists(renamed)
 
         for sig_t in cls.__signal_types:
-            if sig_t == "cafe":
-                continue
-
             for exp in cls.__experiment_numbers:
                 try:
                     shutil.copyfile(
                         f"{raw}/main-session_{sig_t}-{exp}_formatted.csv",
                         f"{renamed}/{sig_t}_{exp}.csv"
-                    )
-                except Exception as e:
-                    print(e)
-                    continue
-
-        # Mudar essa lógica aqui
-        # dá pra juntar tudo no for de cima
-        for cff_t in cls.__coffee_type_numbers:
-            for exp in cls.__experiment_numbers:
-                try:
-                    shutil.copyfile(
-                        f"{raw}/main-session_cafe-{exp}_{cff_t}_formatted.csv",
-                        f"{renamed}/cafe-{cff_t}_{exp}.csv"
                     )
                 except Exception as e:
                     print(e)
