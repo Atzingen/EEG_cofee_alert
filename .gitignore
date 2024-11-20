@@ -131,6 +131,5 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-/dataset_eeg_cafe2022/
-src/data/rawSignalFiles/*.csv
-src/data/treatedSignalFiles/*.csv
+dataset_eeg_cafe2022/
+assets/truncation_intervals/
