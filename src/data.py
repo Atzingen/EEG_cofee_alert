@@ -1,10 +1,11 @@
+import os
 import pandas as pd
 import numpy as np
 import copy
 import plotly.express as px
 import plotly.graph_objects as go
 from ipywidgets import Output
-from typing import List, Dict
+from typing import List, Dict, Optional
 import json
 
 
@@ -34,6 +35,7 @@ class Formatter:
 
         return formatted_dfs
 
+
 class Truncate:
     """
         Corta todos os sinais de um DataFrame por canal de 
@@ -44,7 +46,7 @@ class Truncate:
         self.channels = ['Fp1', 'Fp2', 'C3', 'C4', 'P7', 'P8', 'O1', 'O2']
 
         self.df = None
-        self.trunc_intervals = TruncIntervals(trunc_intervals_path)
+        self.trunc_intervals = TruncateIntervals(trunc_intervals_path)
         self.csv_filename = None
 
 
@@ -129,40 +131,73 @@ class Plotter:
         
         return fig
 
-class TruncIntervals:
-    def __init__(self, trunc_intervals_path: str):
-        self.channels = ['Fp1', 'Fp2', 'C3', 'C4', 'P7', 'P8', 'O1', 'O2']
-        self.trunc_intervals_path = trunc_intervals_path
-        
-        self.filename = None
-        self.file_intervals = None
 
+class TruncateIntervals:
+    """
+    A classe `TruncateIntervals` gerencia arquivos de corte de intervalos para diferentes canais de dados.
+    
+    Args:
+        truncate_intervals_path (str): Caminho para o diretório onde os arquivos de intervalos de corte (JSON) são armazenados.
+    """
+
+    def __init__(self, truncate_intervals_path: str) -> None:
+        self.channels: List[str] = ['Fp1', 'Fp2', 'C3', 'C4', 'P7', 'P8', 'O1', 'O2']
+        self.trunc_intervals_path: str = truncate_intervals_path
         
-    def load_file_intervals(self, csv_file):
-        self.filename = csv_file.replace('.csv','')
-        self.file_intervals = {channel: [] for channel in self.channels}
+        self.__filename: Optional[str] = None
+        self.__file_intervals: Dict[str, List[Dict[str, float]]] = None
+
+    def load_file_intervals(self, csv_file_path: str) -> None:
+        """
+        Carrega os intervalos de um arquivo JSON correspondente a um arquivo CSV fornecido.
+        Se o arquivo JSON não existir, cria uma estrutura de dados vazia para cada canal.
+        
+        Args:
+            csv_file_path (str): Caminho para o arquivo CSV utilizado para determinar o nome do arquivo JSON de intervalos.
+        """
+        self.__filename = os.path.basename(csv_file_path).replace('.csv', '')
         
         try:
-            with open(f'{self.trunc_intervals_path}/{self.filename}.json', 'r') as file:
-                self.file_intervals = json.load(file)
+            with open(f'{self.trunc_intervals_path}/{self.__filename}.json', 'r') as file:
+                self.__file_intervals = json.load(file)
         except FileNotFoundError:
-                self.file_intervals = {channel: [] for channel in self.channels}
+            self.__file_intervals = {channel: [] for channel in self.channels}
 
+    def save_current_file_intervals(self) -> None:
+        """
+        Salva os intervalos de corte atuais em um arquivo JSON com base no nome do arquivo carregado.
+        """
+        with open(f'{self.trunc_intervals_path}/{self.__filename}.json', 'w') as file:
+            json.dump(self.__file_intervals, file)
 
-    def save_current_file_intervals(self):
-            with open(f'{self.trunc_intervals_path}/{self.filename}.json', 'w') as file:
-                json.dump(self.file_intervals, file)
-
-                
-    def add_interval_by_channel(self, channel: str, start: float, end: float):
-        self.file_intervals[channel].append({'start': start, 'end': end})
-
-
-    def pop_interval_by_channel(self, channel: str):
-        self.file_intervals[channel].pop()
-
+    def add_interval_by_channel(self, channel: str, start: float, end: float) -> None:
+        """
+        Adiciona um novo intervalo de corte para um canal específico.
         
-    def get_channel_intervals(self, channel: str) -> List[Dict[str,float]]:
-        return self.file_intervals[channel]
+        Args:
+            channel (str): Nome do canal.
+            start (float): Início do intervalo.
+            end (float): Fim do intervalo.
+        """
+        self.__file_intervals[channel].append({'start': start, 'end': end})
 
+    def pop_interval_by_channel(self, channel: str) -> None:
+        """
+        Remove o último intervalo de corte de um canal específico.
+        
+        Args:
+            channel (str): Nome do canal.
+        """
+        self.__file_intervals[channel].pop()
 
+    def get_channel_intervals(self, channel: str) -> List[Dict[str, float]]:
+        """
+        Retorna a lista de intervalos de corte para um canal específico.
+        
+        Args:
+            channel (str): Nome do canal.
+        
+        Returns:
+            List[Dict[str, float]]: Lista de dicionários com os intervalos de início e fim para o canal.
+        """
+        return self.__file_intervals[channel]
