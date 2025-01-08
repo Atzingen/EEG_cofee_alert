@@ -50,13 +50,15 @@ class File:
             df.to_csv(f'{path}/{filenames[index]}')
 
     @classmethod
-    def get_files_from(cls, resource: str) -> List[str]:
+    def get_files_from(cls, resource: str, subdirs: str = "") -> List[str]:
         return [file for file \
-                in os.listdir(cls.get_path_by(resource=resource))]
+                in os.listdir(cls.get_path_by(resource=resource, subdirs=subdirs))]
 
     @classmethod
-    def get_path_by(cls, resource: str) -> Path:
-        return Path(cls.__project_path, cls.__resource_paths[resource])
+    def get_path_by(cls, resource: str, subdirs: str = "") -> Path:
+        return Path(cls.__project_path,
+                    cls.__resource_paths[resource],
+                    subdirs)
 
     @classmethod
     def rename_raw_files(cls) -> None:
