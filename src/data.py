@@ -1,6 +1,7 @@
 from ipywidgets import Output
-from typing import List, Dict, Optional
+from typing import List, Dict, Optional, Tuple
 from pathlib import Path
+from numpy.typing import NDArray
 import plotly.express as px
 import plotly.graph_objects as go
 import pandas as pd
@@ -8,6 +9,7 @@ import numpy as np
 import os
 import copy
 import json
+import random
 
 from src.file import File
 
@@ -298,3 +300,43 @@ class Continuous:
             output_filename = f'{base_filename}_{idx + 1}.csv'
             segment.to_csv(f'{self.output_data_path}/{output_filename}', index=False)
 
+
+class Windowing:
+    def __init__(self, input_data_path: str, window_channels: List[str], window_size: int, normalize: bool = False) -> None:
+        self.input_data_path: str = input_data_path
+        self.window_channels: List[str] = window_channels
+        self.window_size: int = window_size
+        self.normalize: bool = normalize
+        self.__COFFEE_TYPES: Dict[str, int] = {
+            "cafe-1": 0,
+            "cafe-2": 1
+        }
+
+    def set_input_data_path(self, input_data_path: str) -> None:
+        self.input_data_path = input_data_path
+        
+    def process(self) -> Tuple[NDArray[np.float_], NDArray[np.float_]]:
+        input_output: List[Tuple[NDArray[np.float_], float]] = []
+
+        for filename in os.listdir(self.input_data_path):
+            coffee_type = self.__COFFEE_TYPES[filename.split('_')[0]]
+            data_frame = pd.read_csv(f'{self.input_data_path}/{filename}')
+            data = data_frame[self.window_channels].to_numpy()
+
+            if data.shape[0] < self.window_size:
+                continue
+
+            loops = data.shape[0] - self.window_size + 1
+
+            for i in range(loops):
+                segment = data[i:i+self.window_size]
+                if self.normalize:
+                    segment = (segment - np.min(segment)) / (np.max(segment) - np.min(segment) + 1e-8)
+                input_output.append((segment, coffee_type))
+
+        random.shuffle(input_output)
+
+        input_array = np.array([x[0] for x in input_output], dtype=np.float_)
+        output_array = np.array([x[1] for x in input_output], dtype=np.float_)
+
+        return input_array, output_array
