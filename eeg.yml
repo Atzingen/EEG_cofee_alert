@@ -1,12 +1,19 @@
 name: eeg
 channels:
+  - conda-forge
   - defaults
 dependencies:
-  - pandas
-  - matplotlib
   - python=3.8
-  - jupyter
-  - plotly
-  - ipywidgets
+  - pandas
   - numpy
+  - matplotlib
+  - plotly
+  - jupyter
+  - ipywidgets
   - scipy
+  - scikit-learn
+  - tqdm
+  - tensorflow-gpu
+  - pip
+  - pip:
+      - keras-tuner
