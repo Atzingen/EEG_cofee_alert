@@ -133,3 +133,4 @@ dmypy.json
 
 dataset_eeg_cafe2022/
 assets/truncation_intervals/
+logs/

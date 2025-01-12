@@ -32,7 +32,7 @@ class File:
     def get_data_from_bucket():
         '''
             #!/bin/bash
-            gsutil cp -r gs://dataset_eeg_cafe2022 ./
+            gsutil -m cp -r gs://dataset_eeg_cafe2022 ./
         '''
         pass
 
