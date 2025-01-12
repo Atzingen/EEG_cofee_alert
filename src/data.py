@@ -315,8 +315,8 @@ class Windowing:
     def set_input_data_path(self, input_data_path: str) -> None:
         self.input_data_path = input_data_path
         
-    def process(self) -> Tuple[NDArray[np.float_], NDArray[np.float_]]:
-        input_output: List[Tuple[NDArray[np.float_], float]] = []
+    def process(self) -> Tuple[NDArray[np.float64], NDArray[np.float64]]:
+        input_output: List[Tuple[NDArray[np.float64], float]] = []
 
         for filename in os.listdir(self.input_data_path):
             coffee_type = self.__COFFEE_TYPES[filename.split('_')[0]]
@@ -336,7 +336,7 @@ class Windowing:
 
         random.shuffle(input_output)
 
-        input_array = np.array([x[0] for x in input_output], dtype=np.float_)
-        output_array = np.array([x[1] for x in input_output], dtype=np.float_)
+        input_array = np.array([x[0] for x in input_output], dtype=np.float64)
+        output_array = np.array([x[1] for x in input_output], dtype=np.float64)
 
         return input_array, output_array
